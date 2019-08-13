@@ -28,38 +28,34 @@ public:
 		return str;
 	}
 
-									/* CONSTRUCTORS  */
-	String(int size = 80)
+											/* CONSTRUCTORS */
+	String(int size = 80) : size(size == 0 ? 80 : size > 0 ? size : -size), str(new char[size] {})
 	{
-		this->size = size;
-		this->str = new char[size] {};
+		/*this->size = size;
+		this->str = new char[size] {};*/
 		cout << "DefConstructor:\t" << this << endl;
 	}
-
-	String(const char str[])
+	String(const char str[]) :String(strlen(str) + 1)
 	{
-		this->size = strlen(str) + 1;
-		this->str = new char[size] {};
+		//this->size = strlen(str) + 1;
+		//this->str = new char[size] {};
 		for (int i = 0; str[i]; i++)this->str[i] = str[i];
 		cout << "Constructor:\t" << this << endl;
 	}
-
-	String(const String& other)
+	String(const String& other) : size(other.size), str(new char[size] {})
 	{
-		this->size = other.size;
-		this->str = new char[size] {};
+		/*this->size = other.size;
+		this->str = new char[size] {};*/
 		for (int i = 0; i < size; i++)this->str[i] = other.str[i];
 		cout << "CopyConstructor:\t" << this << endl;
 	}
-
-	String(String&& other)
+	String(String&& other) : size(other.size), str(other.str)
 	{
-		this->size = other.size;
-		this->str = other.str;
+		//this->size = other.size;
+		//this->str = other.str;
 		other.str = nullptr;
 		cout << "MoveConstructor:\t" << this << endl;
 	}
-
 
 	~String()
 	{
@@ -67,7 +63,7 @@ public:
 		cout << "Destructor:\t" << this << endl;
 	}
 
-										/* OPERATORS */
+							/* OPERATORS */
 	String& operator+=(const String& other)
 	{
 
@@ -106,7 +102,7 @@ public:
 		return *this;
 	}
 
-											/* FUNCTIONS */
+									/* FUNCTIONS */
 	void print()
 	{
 		cout << "size:\t" << size << endl;
